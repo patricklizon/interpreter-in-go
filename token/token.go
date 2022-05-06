@@ -8,26 +8,52 @@ type Token struct {
 }
 
 const (
-	ILLEGAL   = "ILLEGAL"
-	EOF       = "EOF"
-	IDENT     = "IDENT"
-	INT       = "INT"
-	ASSIGN    = "ASSIGN"
-	PLUS      = "PLUS"
+	// Identifiers + literals
+	ILLEGAL = "ILLEGAL"
+	EOF     = "EOF"
+	IDENT   = "IDENT"
+	INT     = "INT"
+
+	// Operators
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	BANG     = "!"
+	ASTERISK = "*"
+	SLASH    = "/"
+
+	EQ     = "=="
+	NOT_EQ = "!="
+
+	LT = "<"
+	GT = ">"
+
+	// Keywords
+	FUNCTION = "FUNCTION"
+	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
+
+	// Delimiters
 	COMMA     = "COMMA"
 	SEMICOLON = "SEMICOLON"
 	LPAREN    = "LPAREN"
 	RPAREN    = "RPAREN"
 	LBRACE    = "LBRACE"
 	RBRACE    = "RBRACE"
-	FUNCTION  = "FUNCTION"
-	LET       = "LET"
 )
 
 var keywords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
-}
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN}
 
 func LookupIdent(ident string) TokenType {
 	if tok, ok := keywords[ident]; ok {
