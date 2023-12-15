@@ -11,8 +11,6 @@ Learning go by writing an interpreter.
   - [Parsing](#parsing)
   - [Evaluation](#evaluation)
 
-[//]: # 'AUTO INSERT HEADER PREPUBLISH
-
 ## Prerequisites
 
 - [Go](https://golang.org/doc/install), version defined in [go.mod](go.mod) file

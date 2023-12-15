@@ -36,11 +36,22 @@ const (
 	GT       = ">"
 	EQ       = "=="
 	NOT_EQ   = "!="
+	// keywords
+	TRUE   = "TRUE"
+	FALSE  = "FALSE"
+	IF     = "IF"
+	ELSE   = "ELSE"
+	RETURN = "RETURN"
 )
 
 var keywords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
 }
 
 // check if the identifier is a keyword, if so, return the token types

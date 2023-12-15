@@ -81,15 +81,18 @@ func (l *Lexer) NextToken() token.Token {
 		tok = makeToken(token.GT, l.ch)
 
 	default:
-		if isLetter(l.ch) {
+		switch true {
+		case isLetter(l.ch):
 			tok.Literal = l.readIdent()
 			tok.Type = token.LookupIdent(tok.Literal)
 			return tok
-		} else if isDigit(l.ch) {
+
+		case isDigit(l.ch):
 			tok.Literal = l.readNumber()
 			tok.Type = token.INT
 			return tok
-		} else {
+
+		default:
 			println(string(l.ch))
 			tok.Type = token.ILLEGAL
 		}
