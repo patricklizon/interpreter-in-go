@@ -48,6 +48,8 @@ etc.
 
 ```js
     // Collection of tokens that represent the program.
+    // in real-life, token would be an object with more properties like
+    // file name, line number, etc.
     [
         { type: 'LET', literal: 'let' },
         { type: 'IDENTIFIER', literal: 'ten' },
