@@ -62,6 +62,24 @@ func (l *Lexer) NextToken() token.Token {
 		tok.Type = token.EOF
 		tok.Literal = ""
 
+	case '!':
+		tok = makeToken(token.BANG, l.ch)
+
+	case '-':
+		tok = makeToken(token.MINUS, l.ch)
+
+	case '/':
+		tok = makeToken(token.SLASH, l.ch)
+
+	case '*':
+		tok = makeToken(token.ASTERISK, l.ch)
+
+	case '<':
+		tok = makeToken(token.LT, l.ch)
+
+	case '>':
+		tok = makeToken(token.GT, l.ch)
+
 	default:
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdent()
