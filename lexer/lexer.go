@@ -66,7 +66,13 @@ func (l *Lexer) NextToken() token.Token {
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdent()
 			tok.Type = token.LookupIdent(tok.Literal)
+			return tok
+		} else if isDigit(l.ch) {
+			tok.Literal = l.readNumber()
+			tok.Type = token.INT
+			return tok
 		} else {
+			println(string(l.ch))
 			tok.Type = token.ILLEGAL
 		}
 	}
@@ -74,16 +80,6 @@ func (l *Lexer) NextToken() token.Token {
 	l.readChar()
 
 	return tok
-}
-
-func (l *Lexer) readIdent() string {
-	startPosition := l.position
-
-	for isLetter(l.ch) {
-		l.readChar()
-	}
-
-	return l.input[startPosition:l.position]
 }
 
 // advance our position until we encounter a non-whitespace character
@@ -107,6 +103,26 @@ func (l *Lexer) readChar() {
 	l.readPosition += 1
 }
 
+func (l *Lexer) readIdent() string {
+	startPosition := l.position
+
+	for isLetter(l.ch) {
+		l.readChar()
+	}
+
+	return l.input[startPosition:l.position]
+}
+
+func (l *Lexer) readNumber() string {
+	startPosition := l.position
+
+	for isDigit(l.ch) {
+		l.readChar()
+	}
+
+	return l.input[startPosition:l.position]
+}
+
 // makes token based on the current character
 func makeToken(tokenType token.TokenType, ch byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(ch)}
@@ -115,4 +131,9 @@ func makeToken(tokenType token.TokenType, ch byte) token.Token {
 // checks if the current character is a letter
 func isLetter(char byte) bool {
 	return 'a' <= char && char <= 'z' || 'A' <= char && char <= 'Z' || char == '_'
+}
+
+// checks if the current character is a digit
+func isDigit(char byte) bool {
+	return '0' <= char && char <= '9'
 }
