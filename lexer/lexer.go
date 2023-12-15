@@ -1,6 +1,8 @@
 package lexer
 
-import "github.com/patricklizon/interpreter-in-go/token"
+import (
+	"github.com/patricklizon/interpreter-in-go/token"
+)
 
 type Lexer struct {
 	input        string
@@ -26,33 +28,69 @@ func New(input string) *Lexer {
 func (l *Lexer) NextToken() token.Token {
 	tok := token.Token{}
 
+	l.skipWhitespace()
+
 	switch l.ch {
 	case '=':
 		tok = makeToken(token.ASSIGN, l.ch)
+
 	case ':':
 		tok = makeToken(token.COLON, l.ch)
+
 	case ';':
 		tok = makeToken(token.SEMICOLON, l.ch)
+
 	case '(':
 		tok = makeToken(token.LPAREN, l.ch)
+
 	case ')':
 		tok = makeToken(token.RPAREN, l.ch)
+
 	case ',':
 		tok = makeToken(token.COMA, l.ch)
+
 	case '+':
 		tok = makeToken(token.PLUS, l.ch)
+
 	case '{':
 		tok = makeToken(token.LBRACE, l.ch)
+
 	case '}':
 		tok = makeToken(token.RBRACE, l.ch)
+
 	case 0:
 		tok.Type = token.EOF
 		tok.Literal = ""
+
+	default:
+		if isLetter(l.ch) {
+			tok.Literal = l.readIdent()
+			tok.Type = token.LookupIdent(tok.Literal)
+		} else {
+			tok.Type = token.ILLEGAL
+		}
 	}
 
 	l.readChar()
 
 	return tok
+}
+
+func (l *Lexer) readIdent() string {
+	startPosition := l.position
+
+	for isLetter(l.ch) {
+		l.readChar()
+	}
+
+	return l.input[startPosition:l.position]
+}
+
+// advance our position until we encounter a non-whitespace character
+func (l *Lexer) skipWhitespace() {
+	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
+		l.readChar()
+	}
 }
 
 // sets the next character and advances our position in the input string
@@ -72,4 +110,9 @@ func (l *Lexer) readChar() {
 // makes token based on the current character
 func makeToken(tokenType token.TokenType, ch byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(ch)}
+}
+
+// checks if the current character is a letter
+func isLetter(char byte) bool {
+	return 'a' <= char && char <= 'z' || 'A' <= char && char <= 'Z' || char == '_'
 }
