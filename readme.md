@@ -17,6 +17,8 @@ Learning go by writing an interpreter.
 
 ## Start
 
+To initialize repl run:
+
 ```sh
 go run main.go
 ```
