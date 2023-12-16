@@ -7,14 +7,14 @@ import (
 )
 
 func TestNextToken(t *testing.T) {
-	input := `let five = 5;
+	input := `let five_int = 5;
 let ten = 10;
 
 let add = fn(x, y) {
 	x + y;
 }
 
-let result = add(five, ten);
+let result = add(five_int, ten);
 
 !-/*5;
 5 < 10 > 5;
@@ -33,9 +33,9 @@ if (5 < 10) {
 		expectedTokenType token.TokenType
 		expectedLiteral   string
 	}{
-		// let five = 5;
+		// let five_int = 5;
 		{token.LET, "let"},
-		{token.IDENT, "five"},
+		{token.IDENT, "five_int"},
 		{token.ASSIGN, "="},
 		{token.INT, "5"},
 		{token.SEMICOLON, ";"},
@@ -64,13 +64,13 @@ if (5 < 10) {
 		{token.SEMICOLON, ";"},
 		{token.RBRACE, "}"},
 
-		// let result = add(five, ten);
+		// let result = add(five_int, ten);
 		{token.LET, "let"},
 		{token.IDENT, "result"},
 		{token.ASSIGN, "="},
 		{token.IDENT, "add"},
 		{token.LPAREN, "("},
-		{token.IDENT, "five"},
+		{token.IDENT, "five_int"},
 		{token.COMA, ","},
 		{token.IDENT, "ten"},
 		{token.RPAREN, ")"},
