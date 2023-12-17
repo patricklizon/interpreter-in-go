@@ -9,7 +9,10 @@ Learning go by writing an interpreter.
 - [How interpreter works](#how-interpreter-works)
   - [Lexical Analysis](#lexical-analysis)
   - [Parsing](#parsing)
+    - [Pratt parsing](#pratt-parsing)
+    - [Parse tree](#parse-tree)
   - [Evaluation](#evaluation)
+- [Terminology](#terminology)
 
 ## Prerequisites
 
@@ -63,6 +66,17 @@ etc.
 
 ### Parsing
 
+#### Pratt parsing
+
+Approach for parsing described in this book is called [Pratt parsing](https://en.wikipedia.org/wiki/Pratt_parser). It's a top-down operator precedence parser. It's a way of parsing expressions without using a grammar.
+
+**More can be read here:**
+
+- [Top Down Operator Precedence](https://crockford.com/javascript/tdop/tdop.html)
+- [Pratt Parsers: Expression Parsing Made Easy](https://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
+
+#### Parse tree
+
 The interpreter takes the tokens and organizes them into a data structure called
 a parse tree (or syntax tree). This step checks the tokens for syntax errors and
 organizes them in a way that reflects the structure of the program.
@@ -109,3 +123,44 @@ organizes them in a way that reflects the structure of the program.
 The interpreter walks through the parse tree and executes each operation as it
 goes. This could involve doing calculations, running functions, or manipulating
 data.
+
+## Terminology
+
+**Token** - is a single, meaningful unit of information within a program. Tokens
+can be thought of as the indivisible "words" in the language.
+
+**Lexical analysis** - is the process of converting a sequence of characters into
+a sequence of tokens.
+
+**Parsing** - is the process of analyzing a string of symbols, either in natural
+language, computer languages or data structures, conforming to the rules of a
+formal grammar.
+
+**Expression** - is a combination of one or more explicit values, constants,
+variables, operators, and functions that the programming language interprets
+and computes to produce another value.
+
+**Abstract syntax tree (AST)** - is a tree representation of the abstract syntactic
+structure of source code written in a programming language. Each node of the tree
+denotes a construct occurring in the source code.
+
+**prefix operator** - is an operator that is written before its operand. Prefix
+operators include unary logical `not` and arithmetic `minus` operators.
+
+**infix operator** - is an operator that is written between its operands. Infix
+operators include arithmetic operators, such as addition, and logical operators,
+such as `and` and `or`.
+
+**postfix operator** - is an operator that is written after its operand. Postfix
+operators include the `increment` and `decrement` operators.
+
+**precedence** - is a collection of rules that reflect conventions about which
+procedures to perform first in order to evaluate a given mathematical expression.
+
+**associativity** - is a property of some binary operations. It describes in which
+order operators of the same precedence are evaluated.
+
+**binary operator** - is an operator that operates on two operands and manipulates
+them to return a result.
+
+**binary expression** - is an expression that has two operands and one operator.
