@@ -1,4 +1,4 @@
-# Interpreter in go &middot;
+# Interpreter in go &middot; ![test workflow](https://github.com/patricklizon/interpreter-in-go/actions/workflows/go.yml/badge.svg?event=push)
 
 Learning go by writing an interpreter.
 
