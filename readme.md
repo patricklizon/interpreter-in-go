@@ -67,6 +67,43 @@ The interpreter takes the tokens and organizes them into a data structure called
 a parse tree (or syntax tree). This step checks the tokens for syntax errors and
 organizes them in a way that reflects the structure of the program.
 
+**Input:**
+
+```js
+    let ten = 5 + 5;
+```
+
+**Output:**
+
+```js
+    // The parse tree is a nested collection of nodes that represent the
+    // structure of the program.
+    {
+        type: 'LET_STATEMENT',
+        token: { type: 'LET', literal: 'let' },
+        name: {
+            type: 'IDENTIFIER',
+            token: { type: 'IDENTIFIER', literal: 'ten' },
+            value: 'ten',
+        },
+        value: {
+            type: 'INFIX_EXPRESSION',
+            token: { type: 'PLUS_SIGN', literal: '+' },
+            left: {
+                type: 'INT',
+                token: { type: 'INT', literal: '5' },
+                value: 5,
+            },
+            operator: '+',
+            right: {
+                type: 'INT',
+                token: { type: 'INT', literal: '5' },
+                value: 5,
+            },
+        },
+    };
+```
+
 ### Evaluation
 
 The interpreter walks through the parse tree and executes each operation as it
