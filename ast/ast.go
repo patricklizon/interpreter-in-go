@@ -122,6 +122,29 @@ func (il *IntegerLiteral) String() string {
 	return il.Token.Literal
 }
 
+type PrefixExpression struct {
+	Token    token.Token
+	Operator string
+	Right    Expression
+}
+
+func (pe *PrefixExpression) expressionNode() {}
+
+func (pe *PrefixExpression) TokenLiteral() string {
+	return pe.Token.Literal
+}
+
+func (pe *PrefixExpression) String() string {
+	var buffer bytes.Buffer
+
+	buffer.WriteString("(")
+	buffer.WriteString(pe.Operator)
+	buffer.WriteString(pe.Right.String())
+	buffer.WriteString(")")
+
+	return buffer.String()
+}
+
 type Program struct {
 	Statements []Statement
 }
