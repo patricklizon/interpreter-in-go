@@ -7,6 +7,37 @@ import (
 	"github.com/patricklizon/interpreter-in-go/lexer"
 )
 
+func TestIntegerLiteralExpression(t *testing.T) {
+	input := "5;"
+
+	l := lexer.New(input)
+	p := New(l)
+
+	program := p.ParseProgram()
+	checkParseErrors(t, p)
+	if program == nil {
+		t.Fatalf("ParseProgram() returned nil")
+	}
+
+	if len(program.Statements) != 1 {
+		t.Fatalf("program.Statements does not contain 1 statements, got %d", len(program.Statements))
+	}
+
+	stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("program.Statements()[0] is not an expression statement, got %T", stmt)
+	}
+
+	ident, ok := stmt.Expression.(*ast.IntegerLiteral)
+	if !ok {
+		t.Fatalf("expr not *ast.IntegerLiteral, got %T", ident)
+	}
+
+	if ident.Value != 5 {
+		t.Errorf("ident.Value not '5', got %T", ident)
+	}
+}
+
 func TestIdentifierExpression(t *testing.T) {
 	input := "foobar"
 
